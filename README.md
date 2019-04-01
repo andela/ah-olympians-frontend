@@ -238,7 +238,3 @@ No additional parameters required
 ### Get Tags
 
 `GET /api/tags`
-
-
-
-
