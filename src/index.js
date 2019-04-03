@@ -1,12 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import Approuter from './routers/Approuter'
-import * as serviceWorker from './serviceWorker'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import './components/profile/styles/Profile.css';
+import './css/bootstrap.min.css';
+import './index.css';
+import Approuter from './routers/Approuter';
+import * as serviceWorker from './serviceWorker';
+import store from './store/index';
 
-ReactDOM.render(<Approuter />, document.getElementById('root'))
+require('dotenv').config();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister()
+ReactDOM.render(
+  <Provider store={store}>
+    <Approuter />
+  </Provider>,
+  document.getElementById('root'),
+);
+
+serviceWorker.unregister();

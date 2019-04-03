@@ -1,0 +1,3 @@
+export const EDITPROFILE = 'EDITPROFILE';
+export const GETPROFILE = 'GETPROFILE';
+export const GETARTICLE = 'GETARTICLE';

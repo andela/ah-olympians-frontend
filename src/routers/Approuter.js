@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
-import Login from '../components/Login'
-import Home from '../components/Home'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Profile from '../components/profile/Profile';
 
 const Approuter = () => (
   <BrowserRouter>
     <div>
       <Switch>
-        <Route path='/' component={Home} exact />
-        <Route path='/login' component={Login} />
+        <Route path="/profile" component={Profile} />
       </Switch>
     </div>
   </BrowserRouter>
-)
+);
 
-export default Approuter
+export default Approuter;
