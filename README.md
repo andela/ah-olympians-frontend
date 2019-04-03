@@ -1,6 +1,6 @@
 Authors Haven - A Social platform for the creative at heart.
 =======
-[![Build Status](https://travis-ci.org/andela/ah-olympians-frontend.svg?branch=develop)](https://travis-ci.org/andela/ah-olympians-frontend) 
+[![Build Status](https://travis-ci.org/andela/ah-olympians-frontend.svg?branch=develop)](https://travis-ci.org/andela/ah-olympians-frontend) [![Coverage Status](https://coveralls.io/repos/github/andela/ah-olympians-frontend/badge.svg?branch=develop)](https://coveralls.io/github/andela/ah-olympians-frontend?branch=develop)  [![Maintainability](https://api.codeclimate.com/v1/badges/28210005ffaaa8d12105/maintainability)](https://codeclimate.com/github/andela/ah-olympians-frontend/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/28210005ffaaa8d12105/test_coverage)](https://codeclimate.com/github/andela/ah-olympians-frontend/test_coverage)
 ## Vision
 Create a community of like minded authors to foster inspiration and innovation
 by leveraging the modern web.
