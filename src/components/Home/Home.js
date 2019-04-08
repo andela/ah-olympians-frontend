@@ -1,14 +1,15 @@
 import React from 'react';
 import NavbarInstance from '../Navbar/Navbar';
+import Footer from '../static/Footer';
 import './Home.scss';
-import '../../css/bootstrap.min.css';
 
 const App = () => (
   <div className="App">
+    <NavbarInstance />
     <header className="App-header">
-      <NavbarInstance />
       <p>WELCOME TO AUTHORS HAVEN</p>
     </header>
+    <Footer />
   </div>
 );
 

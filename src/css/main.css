@@ -1,0 +1,12 @@
+body {
+  background-color: #f0f5f5f5; }
+
+.page-top {
+  margin-top: 50px; }
+
+.root-content {
+  min-height: 100vh;
+  position: relative; }
+
+.footer-space {
+  min-height: 130px; }

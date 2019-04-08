@@ -1,0 +1,18 @@
+@import "./variables";
+
+body {
+  background-color: $white-background;
+}
+
+.page-top {
+  margin-top: 50px;
+}
+
+.root-content {
+  min-height: 100vh;
+  position: relative;
+}
+
+.footer-space {
+  min-height: 130px;
+}
