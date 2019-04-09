@@ -1,7 +1,7 @@
 @import "../../css/variables";
 
 .App-header {
-  background-color: #282c34;
+  background-color: #F7F9F9;
   margin-top: 200px;
   min-height: 100vh;
   display: flex;
@@ -9,4 +9,21 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: $white-color; }
+  color: black; }
+
+.image-head {
+  width: 100%;
+  margin-top: 110px; }
+
+.carousel {
+  height: 400px;
+  margin: 0 auto; }
+
+.carousel-item {
+  height: 400px; }
+
+.carousel-item img {
+  object-fit: cover; }
+
+.card-text {
+  font-size: small; }

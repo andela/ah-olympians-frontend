@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render Navbar 1`] = `
+<Bootstrap(undefined)
+  bg="light"
+  className="navbar navbar-expand-lg navbar-dark bg-dark"
+  expand="lg"
+  fixed="top"
+>
+  <Bootstrap(Image)
+    alt="logo"
+    responsive="true"
+    src="authors.png"
+    width="90"
+  />
+  <NavbarToggle
+    aria-controls="basic-navbar-nav"
+    as="button"
+    label="Toggle navigation"
+  />
+  <NavbarCollapse
+    id="basic-navbar-nav"
+  >
+    <Container
+      as="div"
+      fluid={false}
+    >
+      <Bootstrap(Row)
+        className="justify-content-md-end"
+      >
+        <div>
+          <Form
+            as="form"
+            inline={true}
+          >
+            <FormControl
+              as="input"
+              className="mr-sm-2"
+              placeholder="Search"
+              type="text"
+            />
+            <Button
+              active={false}
+              disabled={false}
+              type="button"
+              variant="outline-success"
+            >
+              Search
+            </Button>
+          </Form>
+        </div>
+      </Bootstrap(Row)>
+      <Bootstrap(Row)>
+        <Nav
+          as="div"
+          className="mr-auto"
+          fill={false}
+          justify={false}
+        >
+          <NavLink
+            as={[Function]}
+            disabled={false}
+            href="#home"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            as={[Function]}
+            disabled={false}
+            href="#top"
+          >
+            Newest
+          </NavLink>
+          <NavLink
+            as={[Function]}
+            disabled={false}
+            href="#top"
+          >
+            Technology
+          </NavLink>
+          <NavLink
+            as={[Function]}
+            disabled={false}
+            href="#top"
+          >
+            Local
+          </NavLink>
+        </Nav>
+      </Bootstrap(Row)>
+    </Container>
+  </NavbarCollapse>
+</Bootstrap(undefined)>
+`;

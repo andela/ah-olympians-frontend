@@ -25,6 +25,6 @@ yarn-error.log*
 
 #idea
 .idea/
-.css
+
 yarn.lock
 package-lock.json
