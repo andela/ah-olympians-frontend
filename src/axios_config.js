@@ -11,7 +11,6 @@ try {
 	const error = err.message;
 }
 
-
 const axiosHeader = {
   headers: {
     'Content-Type': 'application/json',
