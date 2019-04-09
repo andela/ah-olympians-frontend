@@ -6,7 +6,6 @@ try {
   userToken = token;
 } catch (err) {}
 
-
 const axiosHeader = {
   headers: {
     'Content-Type': 'application/json',
