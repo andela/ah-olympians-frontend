@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Approuter from '../Approuter';
+import Approuter from './Approuter';
 
 describe('render Article View Container', () => {
   const wrapper = shallow(<Approuter />);
