@@ -5,8 +5,8 @@ import './index.css';
 import './css/bootstrap.min.css';
 import './css/main.scss';
 import Approuter from './routers/Approuter';
-import * as serviceWorker from './serviceWorker';
 import store from './store/store';
+import * as serviceWorker from './serviceWorker';
 
 require('dotenv').config();
 

@@ -54,9 +54,9 @@ class Signup extends Component {
 
     const confirmed = this.state.confirmed_pass;
 
-    if(formErrors.username !== '' || formErrors.email !== '' || formErrors.password !== '' || !confirmed){
+    if(formErrors.username !== undefined || formErrors.email !== undefined || formErrors.password !== undefined || !confirmed){
       this.setState({ validated: false });
-    }else if(formData.username === '' || formData.email === '' || formData.password === ''){
+    }else if(formData.username === undefined || formData.email === undefined || formData.password === undefined){
       this.setState({ validated: false });
     }else{
       this.setState({ validated: true });
@@ -70,7 +70,7 @@ class Signup extends Component {
     this.setState({ user: user });
     if (this.state.conPassword !== this.state.user.password) {
       this.setState({ confirmed_pass: false }, () => this.validateInput(name));
-      
+
     } else {
       this.setState({ confirmed_pass: true }, () => this.validateInput(name));
     }
