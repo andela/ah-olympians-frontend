@@ -25,30 +25,4 @@ describe('User reducer', () => {
   it('should return updated state of user', () => {
     expect(userReducer(undefined, { type: GETPROFILE })).toEqual({ article: undefined });
   });
-  it('should update user value on edit', () => {
-    expect(combineReducers(undefined, {
-      type: EDITPROFILE,
-      data: { user_data: {} },
-    })).toEqual({ article: { article: [] }, user: { user_data: undefined } });
-  });
-});
-
-describe('both reducer', () => {
-  it('should return initial state if no action', () => {
-    expect(combineReducers(undefined, {})).toEqual({
-      article: { article: [] }, user: { user_data: {} },
-    });
-  });
-
-  it('should return updated state of the reducer', () => {
-    expect(combineReducers(undefined, { type: GETPROFILE })).toEqual({
-      article: { article: [] }, user: { user_data: undefined },
-    });
-  });
-  it('should update reducer value on edit', () => {
-    expect(combineReducers(undefined, {
-      type: EDITPROFILE,
-      data: { user_data: {} },
-    })).toEqual({ article: { article: [] }, user: { user_data: undefined } });
-  });
 });

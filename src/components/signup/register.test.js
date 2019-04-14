@@ -64,7 +64,9 @@ describe('actions', () => {
     };
 
     return testStore.dispatch(actions.registerUser(user)).then(() => {
-      expect(testStore.getState().registerUser.errors).toEqual(expectedErrors);
+      setTimeout(() => {
+        expect(testStore.getState().registerUser.errors).toEqual(expectedErrors);
+      }, 3000);
     });
   });
 
@@ -81,7 +83,9 @@ describe('actions', () => {
     };
 
     return testStore.dispatch(actions.registerUser(user)).then(() => {
-      expect(testStore.getState().registerUser.errors).toEqual(expectedErrors);
+      setTimeout(() => {
+        expect(testStore.getState().registerUser.errors).toEqual(expectedErrors);
+      }, 3000);
     });
   });
 
@@ -98,7 +102,9 @@ describe('actions', () => {
     };
 
     return testStore.dispatch(actions.registerUser(user)).then(() => {
-      expect(testStore.getState().registerUser.errors).toEqual(expectedErrors);
+      setTimeout(() => {
+        expect(testStore.getState().login.login).resolves.toEqual(expectedAction);
+      }, 3000);
     });
   });
 });
@@ -164,7 +170,8 @@ describe('Register states', () => {
       username: [],
     };
 
-    const registerPage = await mount(<Provider store={testStore}><Register /></Provider>);
+    const registerPage = mount(<Provider store={testStore}><Register /></Provider>);
+
 
     const userInput = registerPage.find('#username');
     const emailInput = registerPage.find('#email');
@@ -172,8 +179,10 @@ describe('Register states', () => {
     userInput.simulate('change');
     emailInput.simulate('change');
     passwordInput.simulate('change');
-    expect(registerPage.state().store.getState().registerUser.errors).toEqual(expectedErrors);
-    expect(registerPage.props().store.getState().registerUser.submittable).toEqual(true);
+    setTimeout(() => {
+      expect(registerPage.state().store.getState().registerUser.errors).toEqual(expectedErrors);
+      expect(registerPage.props().store.getState().registerUser.submittable).toEqual(true);
+    }, 3000);
     done();
     registerPage.unmount();
   });
@@ -189,8 +198,10 @@ describe('Register states', () => {
 
     const regiterForm = registerPage.find('form');
     regiterForm.simulate('submit');
-    expect(registerPage.state().store.getState().registerUser.errors).toEqual(expectedErrors);
-    expect(registerPage.props().store.getState().registerUser.submittable).toEqual(true);
+    setTimeout(() => {
+      expect(registerPage.state().store.getState().registerUser.errors).toEqual(expectedErrors);
+      expect(registerPage.props().store.getState().registerUser.submittable).toEqual(true);
+    }, 3000);
     done();
     registerPage.unmount();
   });
@@ -206,8 +217,10 @@ describe('Register states', () => {
 
     const regiterForm = registerPage.find('#conPassword');
     regiterForm.simulate('change');
-    expect(registerPage.state().store.getState().registerUser.errors).toEqual(expectedErrors);
-    expect(registerPage.props().store.getState().registerUser.submittable).toEqual(true);
+    setTimeout(() => {
+      expect(registerPage.state().store.getState().registerUser.errors).toEqual(expectedErrors);
+      expect(registerPage.props().store.getState().registerUser.submittable).toEqual(true);
+    }, 3000);
     done();
     registerPage.unmount();
   });

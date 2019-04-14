@@ -1,7 +1,6 @@
 import {
   Card, Container, Grid, Header, Image,
 } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -42,22 +41,21 @@ class Articles extends Component {
                 <Grid stackable>
                   <Grid.Row className="italic article-info">
                     <Grid.Column width={5}>
-                      <b>Created at:</b>{article.created_at.substr(0, article.created_at.indexOf('T'))}
+                      <b>Created at:</b>
+                      {article.created_at.substr(0, article.created_at.indexOf('T'))}
                     </Grid.Column>
                     <Grid.Column width={10}>
-                      <b>ReadTime</b>{article.read_time}
+                      <b>ReadTime</b>
+                      {article.read_time}
                     </Grid.Column>
                     <Grid.Column id="article-author-name" width={5}>
-                      <b>author:</b>{article.author.username}
+                      <b>author:</b>
+                      {article.author.username}
                     </Grid.Column>
                   </Grid.Row>
                   <Grid.Row>
                     <Grid.Column>
-                      <Header className="article-header" as="h2">
-                        <Link className="article-card-title" to={'/articles/'}>
-                          {article.title}
-                        </Link>
-                      </Header>
+                      <Header className="article-header" as="h2" />
                     </Grid.Column>
                   </Grid.Row>
                   <Grid.Row>

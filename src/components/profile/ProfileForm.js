@@ -1,6 +1,5 @@
 import { Button, Form } from 'react-bootstrap';
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
@@ -30,8 +29,10 @@ class ProfileForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     try {
-      if (nextProps.user.profile.profiles['Kelvin Chirchir']) {
-        this.profile = nextProps.user.profile.profiles['Kelvin Chirchir'];
+      const user = JSON.parse(localStorage.getItem('user'));
+      const username = user.user.username;
+      if (nextProps.user.profile.profiles[username]) {
+        this.profile = nextProps.user.profile.profiles[username];
       }
     } catch (e) {
       if (nextProps.user.profile) {
@@ -39,7 +40,7 @@ class ProfileForm extends Component {
           message: 'successfully updated',
           edit: 'off',
         });
-        this.profile = nextProps.user.profile
+        this.profile = nextProps.user.profile;
       }
     }
   }
@@ -77,7 +78,7 @@ class ProfileForm extends Component {
   }
 
   render() {
-    this.renderProfile = <Loader />
+    this.renderProfile = <Loader/>;
     if (this.profile && this.state.edit === 'off' && this.state.message !== 'successfully updated') {
       this.renderProfile = (
         <div className="profile-edit">
@@ -148,27 +149,61 @@ class ProfileForm extends Component {
             </div>
             <Form.Group controlId="password">
               <Form.Label>Username</Form.Label>
-              <Form.Control onChange={this.onChange} name="username" type="text" placeholder="username" defaultValue={this.profile.username} />
+              <Form.Control onChange={this.onChange} name="username" type="text" placeholder="username"
+                            defaultValue={this.profile.username}
+              />
             </Form.Group>
 
             <Form.Group controlId="bio">
               <Form.Label>Bio</Form.Label>
-              <Form.Control as="textarea" onChange={this.onChange} name="bio" type="textarea" rows="4" cols="50" placeholder="Iam a graduate" defaultValue={this.profile.bio} />
+              <Form.Control
+                as="textarea"
+                onChange={this.onChange}
+                name="bio"
+                type="textarea"
+                rows="4"
+                cols="50"
+                placeholder="Iam a graduate"
+                defaultValue={this.profile.bio}
+              />
             </Form.Group>
 
             <Form.Group controlId="interest">
               <Form.Label>Interest</Form.Label>
-              <Form.Control as="textarea" onChange={this.onChange} name="interest" placeholder="Whisky" defaultValue={this.profile.interests} />
+              <Form.Control
+                as="textarea"
+                onChange={this.onChange}
+                name="interest"
+                placeholder="Whisky"
+                defaultValue={this.profile.interests}
+              />
             </Form.Group>
 
             <Form.Group controlId="website">
               <Form.Label>Website</Form.Label>
-              <Form.Control onChange={this.onChange} name="website" type="textarea" rows="4" cols="50" placeholder="Favourite Quotes" defaultValue={this.profile.website} />
+              <Form.Control
+                onChange={this.onChange}
+                name="website"
+                type="textarea"
+                rows="4"
+                cols="50"
+                placeholder="Favourite Quotes"
+                defaultValue={this.profile.website}
+              />
             </Form.Group>
 
-            <Form.Group controlId="quotes">
+            <Form.Group controlId="quotes">»
               <Form.Label>Favourite Quotes</Form.Label>
-              <Form.Control as="textarea" rows="3" onChange={this.onChange} name="favorite" type="textarea" cols="50" placeholder="Favourite Quotes" defaultValue={this.profile.favorite_quote} />
+              <Form.Control
+                as="textarea"
+                rows="3"
+                onChange={this.onChange}
+                name="favorite"
+                type="textarea"
+                cols="50"
+                placeholder="Favourite Quotes"
+                defaultValue={this.profile.favorite_quote}
+              />
             </Form.Group>
 
 

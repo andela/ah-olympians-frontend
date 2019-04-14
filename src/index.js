@@ -13,8 +13,6 @@ import * as serviceWorker from './serviceWorker';
 
 require('dotenv').config();
 
-
-
 ReactDOM.render(
   <Provider store={store}>
     <Approuter />
