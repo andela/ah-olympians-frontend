@@ -1,0 +1,16 @@
+@import "../../css/variables";
+
+body {
+  padding-top: 50;
+}
+
+.page-header {
+  border-bottom: 1px solid $white-color;
+  margin: 10px 0 20px;
+  padding-bottom: 9px;
+}
+
+.center-col {
+  background-color: $secondary-background;
+  border-radius: 20px;
+}

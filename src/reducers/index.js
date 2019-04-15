@@ -1,7 +1,6 @@
-/* Import all your reducers here.
- * This will give a centralised point of access for all reducers.
- */
-
 import { combineReducers } from 'redux';
+import registerReducer from './register';
 
-export default combineReducers({});
+const rootReducer = combineReducers({ registerUser: registerReducer });
+
+export default rootReducer;
