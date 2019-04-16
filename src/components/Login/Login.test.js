@@ -88,7 +88,9 @@ describe('actions', () => {
       user: {},
     };
     await testStore.dispatch(loginAction(wrongEmail, wrongPassword));
-    expect(testStore.getState().login.login).toEqual(expectedAction);
+    setTimeout(() => {
+      expect(testStore.getState().login.login).resolves.toEqual(expectedAction);
+    }, 3000);
   });
   it('Should show logged in true', async () => {
     const isLoggedIn = true;

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/preset-env": "^7.4.3",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "coveralls": "^3.0.3",
@@ -10,19 +11,19 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "enzyme-to-json": "^3.3.5",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "node-sass": "^4.11.0",
-    "npm-run-all": "^4.1.5",
+    "mdbreact": "^4.12.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.6",
+    "react-native-cloudinary": "^1.0.1",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^0.86.0",
     "watch": "^1.0.2"
   },
   "jest": {
@@ -55,12 +56,14 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "node-sass": "^4.11.0",
     "npm-run-all": "^4.1.5",
     "redux-mock-store": "^1.5.3",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "sinon": "^7.3.1"
   }
 }
