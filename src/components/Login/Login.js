@@ -142,7 +142,7 @@ export class Login extends Component {
                   <small>Forgot password?</small>
                 </a>
               </div>
-              <SocialAuth />
+              <SocialAuth history={this.props.history} />
             </form>
           </div>
         </div>
