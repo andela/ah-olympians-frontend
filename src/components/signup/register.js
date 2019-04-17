@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  Form, Row, Col, Button, Container,
-} from 'react-bootstrap';
+import { Form, Row, Col, Button, Container } from 'react-bootstrap';
 import {
   registerUser,
   submitStatus,
@@ -32,21 +30,31 @@ class Signup extends Component {
     };
   }
 
-  validateInput = (input) => {
-    const emailRegex = RegExp(/(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)/);
-    const passwordRegex = RegExp(/^(?=.*[A-Za-z].*)(?=.*[0-9].*)[A-Za-z0-9]{8,}$/);
+  validateInput = input => {
+    const emailRegex = RegExp(
+      /(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)/,
+    );
+    const passwordRegex = RegExp(
+      /^(?=.*[A-Za-z].*)(?=.*[0-9].*)[A-Za-z0-9]{8,}$/,
+    );
     const usernameRegex = RegExp(/(^[a-zA-Z][A-Za-z0-9]{3,}$)/);
     const formData = this.state.user;
     const formErrors = this.state.formErrors;
-    switch(input){
+    switch (input) {
       case 'username':
-        formErrors.username = usernameRegex.test(formData.username) ? undefined : 'username should be alphanumeric, start with letter and more than 3 characters';
+        formErrors.username = usernameRegex.test(formData.username)
+          ? undefined
+          : 'username should be alphanumeric, start with letter and more than 3 characters';
         break;
       case 'email':
-        formErrors.email = emailRegex.test(formData.email) ? undefined : 'invalid email address';
+        formErrors.email = emailRegex.test(formData.email)
+          ? undefined
+          : 'invalid email address';
         break;
       case 'password':
-        formErrors.password = passwordRegex.test(formData.password) ? undefined : 'password should be alphanumeric and not less than 8 characters';
+        formErrors.password = passwordRegex.test(formData.password)
+          ? undefined
+          : 'password should be alphanumeric and not less than 8 characters';
         break;
       default:
         break;
@@ -54,30 +62,38 @@ class Signup extends Component {
 
     const confirmed = this.state.confirmed_pass;
 
-    if(formErrors.username !== undefined || formErrors.email !== undefined || formErrors.password !== undefined || !confirmed){
+    if (
+      formErrors.username !== undefined ||
+      formErrors.email !== undefined ||
+      formErrors.password !== undefined ||
+      !confirmed
+    ) {
       this.setState({ validated: false });
-    }else if(formData.username === undefined || formData.email === undefined || formData.password === undefined){
+    } else if (
+      formData.username === undefined ||
+      formData.email === undefined ||
+      formData.password === undefined
+    ) {
       this.setState({ validated: false });
-    }else{
+    } else {
       this.setState({ validated: true });
     }
-  }
+  };
 
-  handleChange = (event) => {
-    const {name, value} = event.target
+  handleChange = event => {
+    const { name, value } = event.target;
     const { user } = this.state;
     user[name] = value;
     this.setState({ user: user });
     if (this.state.conPassword !== this.state.user.password) {
       this.setState({ confirmed_pass: false }, () => this.validateInput(name));
-
     } else {
       this.setState({ confirmed_pass: true }, () => this.validateInput(name));
     }
   };
 
-  handleConfirmPass = (event) => {
-    const {name, value} = event.target
+  handleConfirmPass = event => {
+    const { name, value } = event.target;
     this.setState({ conPassword: value });
     if (value !== this.state.user.password) {
       this.setState({ confirmed_pass: false }, () => this.validateInput(name));
@@ -86,7 +102,7 @@ class Signup extends Component {
     }
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) {
@@ -105,7 +121,10 @@ class Signup extends Component {
       <div>
         <Container>
           <p className="text-center page-top">
-            Already Registered? <Button href={'/login'} variant="link">Login</Button>
+            Already Registered?{' '}
+            <Button href={'/login'} variant="link">
+              Login
+            </Button>
           </p>
           <div
             className={`alert alert-dismissible alert-success text-center ${
@@ -120,8 +139,12 @@ class Signup extends Component {
           <h2 className="text-center page-header">User Registration</h2>
           <Row>
             <Col sm={3} md={4} />
-            <Col sm={6} md={4} className="center-col">
-              <Form id="register_form" validated={validated} onSubmit={this.handleSubmit}>
+            <Col sm={4} className="center-col">
+              <Form
+                id="register_form"
+                validated={validated}
+                onSubmit={this.handleSubmit}
+              >
                 <Form.Group as={Row} controlId="username">
                   <Form.Label column sm={12}>
                     Username:
@@ -209,11 +232,9 @@ class Signup extends Component {
                   <Col />
                   <Col>
                     <button
-                      className='btn btn-success'
+                      className="btn btn-success"
                       disabled={
-                        (this.props.submittable && validated)
-                          ? ''
-                          : 'disabled'
+                        this.props.submittable && validated ? '' : 'disabled'
                       }
                       variant="info"
                       type="submit"
@@ -227,14 +248,14 @@ class Signup extends Component {
             <Col sm={3} md={4} />
           </Row>
         </Container>
-        <div className="footer-space"></div>
+        <div className="footer-space" />
         <Footer />
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     registerUser: user => dispatch(registerUser(user)),
     submitStatus: submittable => dispatch(submitStatus(submittable)),
@@ -242,7 +263,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.registerUser.user,
     errors: state.registerUser.errors,

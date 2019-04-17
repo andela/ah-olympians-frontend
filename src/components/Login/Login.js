@@ -143,7 +143,9 @@ export class Login extends Component {
                 <button id="submit" type="submit">
                   Login
                 </button>
-                <small>Forgot password?</small>
+                <a href={'/resetpassword'} variant="link">
+                  <small>Forgot password?</small>
+                </a>
               </div>
             </form>
           </div>
@@ -158,5 +160,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginAction } ,
+  { loginAction },
 )(Login);
