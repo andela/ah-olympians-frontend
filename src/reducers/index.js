@@ -1,4 +1,3 @@
-
 import { combineReducers } from 'redux';
 import loginReducer from './login.reducer';
 import registerReducer from './register';
@@ -8,9 +7,12 @@ import { requestPassword } from './requestPasswordReset';
 import { resetPassword } from './resetPassword';
 
 const rootReducer = combineReducers({
-  registerUser: registerReducer, user: userReducer, article: articleReducer, login: loginReducer, requestPassword, resetPassword,
+  registerUser: registerReducer,
+  user: userReducer,
+  article: articleReducer,
+  login: loginReducer,
+  requestPassword,
+  resetPassword,
 });
 
 export default rootReducer;
-
-

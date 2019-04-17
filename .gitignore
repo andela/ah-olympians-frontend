@@ -5,7 +5,7 @@
 
 # testing
 /coverage
-__snapshots__/
+*__snapshots__/
 
 # production
 /build
@@ -28,3 +28,6 @@ package-lock.json
 __snapshots__/
 .css
 
+
+*.css
+yarn.lock

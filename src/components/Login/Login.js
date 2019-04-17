@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import loginAction from '../../actions/index';
 import './Login.scss';
+import SocialAuth from '../social/index';
 
 const emailRegex = RegExp(/(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)/);
-
-const passwordRegex = RegExp(/^(?=.*[A-Za-z].*)(?=.*[0-9].*)[A-Za-z0-9]{8,}$/);
 
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
@@ -127,7 +126,6 @@ export class Login extends Component {
               <div className="password">
                 <label htmlFor="password">Password</label>
                 <input
-                  // className={formErrors.password.length > 0 ? 'error' : null}
                   placeholder="Password"
                   type="password"
                   name="password"
@@ -135,9 +133,6 @@ export class Login extends Component {
                   noValidate
                   onChange={this.handleChange}
                 />
-                {/*{formErrors.password.length > 0 && (*/}
-                {/*  <span className="errorMessage">{formErrors.password}</span>*/}
-                {/*)}*/}
               </div>
               <div className="login">
                 <button id="submit" type="submit">
@@ -147,6 +142,7 @@ export class Login extends Component {
                   <small>Forgot password?</small>
                 </a>
               </div>
+              <SocialAuth history={this.props.history} />
             </form>
           </div>
         </div>

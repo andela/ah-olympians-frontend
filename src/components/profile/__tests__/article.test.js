@@ -11,7 +11,12 @@ describe('render Article View Container', () => {
   };
   // let store = mockStore(storeStateMock);
   let container;
-  const wrapper = mount(<Provider store={store}> <Articles {...props} /> </Provider>, container);
+  const wrapper = mount(
+    <Provider store={store}>
+      <Articles {...props} />
+    </Provider>,
+    container,
+  );
 
   it('renders article component correctly', () => {
     expect(wrapper).toMatchSnapshot();

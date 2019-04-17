@@ -11,7 +11,6 @@ import Register from './register';
 import store from '../../store/store';
 import Approuter from '../../routers/Approuter';
 
-
 const initialState = {
   user: {},
   errors: {
@@ -38,7 +37,9 @@ describe('actions', () => {
       payload: submitStatus,
     };
 
-    const returnAction = await testStore.dispatch(actions.submitStatus(submitStatus));
+    const returnAction = await testStore.dispatch(
+      actions.submitStatus(submitStatus),
+    );
     expect(returnAction).toEqual(expectedAction);
   });
 
@@ -65,7 +66,9 @@ describe('actions', () => {
 
     return testStore.dispatch(actions.registerUser(user)).then(() => {
       setTimeout(() => {
-        expect(testStore.getState().registerUser.errors).toEqual(expectedErrors);
+        expect(testStore.getState().registerUser.errors).toEqual(
+          expectedErrors,
+        );
       }, 3000);
     });
   });
@@ -84,7 +87,9 @@ describe('actions', () => {
 
     return testStore.dispatch(actions.registerUser(user)).then(() => {
       setTimeout(() => {
-        expect(testStore.getState().registerUser.errors).toEqual(expectedErrors);
+        expect(testStore.getState().registerUser.errors).toEqual(
+          expectedErrors,
+        );
       }, 3000);
     });
   });
@@ -103,7 +108,9 @@ describe('actions', () => {
 
     return testStore.dispatch(actions.registerUser(user)).then(() => {
       setTimeout(() => {
-        expect(testStore.getState().login.login).resolves.toEqual(expectedAction);
+        expect(testStore.getState().login.login).resolves.toEqual(
+          expectedErrors,
+        );
       }, 3000);
     });
   });
@@ -121,17 +128,25 @@ describe('Reducers', () => {
   });
 
   it('Should return current state', () => {
-    expect(registerReducer(initialState, { type: 'UNKNOWN_TYPE' })).toEqual(initialState);
+    expect(registerReducer(initialState, { type: 'UNKNOWN_TYPE' })).toEqual(
+      initialState,
+    );
   });
 
   it('Should update user', () => {
     const user = { username: 'omega' };
-    expect(registerReducer(initialState, { type: 'REGISTER_USER', payload: user }).user).toEqual(user);
+    expect(
+      registerReducer(initialState, { type: 'REGISTER_USER', payload: user })
+        .user,
+    ).toEqual(user);
   });
 
   it('Should update rigistration errors', () => {
     const errors = { username: ['username not valid'] };
-    expect(registerReducer(initialState, { type: 'REGISTER_ERROR', payload: errors }).errors).toEqual(errors);
+    expect(
+      registerReducer(initialState, { type: 'REGISTER_ERROR', payload: errors })
+        .errors,
+    ).toEqual(errors);
   });
 });
 
@@ -170,8 +185,11 @@ describe('Register states', () => {
       username: [],
     };
 
-    const registerPage = mount(<Provider store={testStore}><Register /></Provider>);
-
+    const registerPage = mount(
+      <Provider store={testStore}>
+        <Register />
+      </Provider>,
+    );
 
     const userInput = registerPage.find('#username');
     const emailInput = registerPage.find('#email');
@@ -180,8 +198,12 @@ describe('Register states', () => {
     emailInput.simulate('change');
     passwordInput.simulate('change');
     setTimeout(() => {
-      expect(registerPage.state().store.getState().registerUser.errors).toEqual(expectedErrors);
-      expect(registerPage.props().store.getState().registerUser.submittable).toEqual(true);
+      expect(registerPage.state().store.getState().registerUser.errors).toEqual(
+        expectedErrors,
+      );
+      expect(
+        registerPage.props().store.getState().registerUser.submittable,
+      ).toEqual(true);
     }, 3000);
     done();
     registerPage.unmount();
@@ -194,13 +216,21 @@ describe('Register states', () => {
       username: [],
     };
 
-    const registerPage = await mount(<Provider store={testStore}><Register /></Provider>);
+    const registerPage = await mount(
+      <Provider store={testStore}>
+        <Register />
+      </Provider>,
+    );
 
     const regiterForm = registerPage.find('form');
     regiterForm.simulate('submit');
     setTimeout(() => {
-      expect(registerPage.state().store.getState().registerUser.errors).toEqual(expectedErrors);
-      expect(registerPage.props().store.getState().registerUser.submittable).toEqual(true);
+      expect(registerPage.state().store.getState().registerUser.errors).toEqual(
+        expectedErrors,
+      );
+      expect(
+        registerPage.props().store.getState().registerUser.submittable,
+      ).toEqual(true);
     }, 3000);
     done();
     registerPage.unmount();
@@ -213,13 +243,21 @@ describe('Register states', () => {
       username: [],
     };
 
-    const registerPage = await mount(<Provider store={testStore}><Register /></Provider>);
+    const registerPage = await mount(
+      <Provider store={testStore}>
+        <Register />
+      </Provider>,
+    );
 
     const regiterForm = registerPage.find('#conPassword');
     regiterForm.simulate('change');
     setTimeout(() => {
-      expect(registerPage.state().store.getState().registerUser.errors).toEqual(expectedErrors);
-      expect(registerPage.props().store.getState().registerUser.submittable).toEqual(true);
+      expect(registerPage.state().store.getState().registerUser.errors).toEqual(
+        expectedErrors,
+      );
+      expect(
+        registerPage.props().store.getState().registerUser.submittable,
+      ).toEqual(true);
     }, 3000);
     done();
     registerPage.unmount();
@@ -228,7 +266,11 @@ describe('Register states', () => {
 
 describe('Register states', () => {
   it('Should render home page', async (done) => {
-    const homepage = await mount(<Provider store={testStore}><Approuter /></Provider>);
+    const homepage = await mount(
+      <Provider store={testStore}>
+        <Approuter />
+      </Provider>,
+    );
 
     expect(homepage).toMatchSnapshot();
     done();
@@ -238,7 +280,11 @@ describe('Register states', () => {
 
 describe('Register components', () => {
   it('Should render all components', async (done) => {
-    const registerPage = await mount(<Provider store={testStore}><Register /></Provider>);
+    const registerPage = await mount(
+      <Provider store={testStore}>
+        <Register />
+      </Provider>,
+    );
 
     expect(registerPage.find('.alert').exists()).toBeTruthy();
     expect(registerPage.find('.page-header').exists()).toBeTruthy();

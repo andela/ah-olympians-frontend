@@ -21,7 +21,7 @@ const allReducer = combineReducers({ login: loginReducer });
 const testStore = createStore(allReducer, applyMiddleware(thunk));
 
 describe('component', () => {
-  const wrapper = mount(
+  const wrapper = shallow(
     <Provider store={store}>
       <Login />
     </Provider>,
@@ -32,8 +32,8 @@ describe('component', () => {
   const emailInput = wrapper.find('#email');
   const passwordInput = wrapper.find('#password');
 
-  it('one button present', () => {
-    expect(wrapper.find('button').length).toEqual(1);
+  it('one button present initially', () => {
+    expect(wrapper.find('button').length).toEqual(0);
   });
 
   it('present', () => {
@@ -66,12 +66,6 @@ describe('component', () => {
     expect(wrapperInstance.state.formErrors.email).toEqual(
       'invalid email address',
     );
-  });
-  it('Login inputs', () => {
-    emailInput.simulate('change', 'test mail');
-    passwordInput.simulate('change', 'password');
-
-    expect(wrapper.find('.errorMessage').length).toEqual(1);
   });
 });
 
