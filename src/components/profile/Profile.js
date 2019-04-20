@@ -4,6 +4,7 @@ import ProfileForm from './ProfileForm';
 import Followers from './Followers';
 import Articles from './Articles';
 import NavbarInstance from '../Navbar/Navbar';
+import Footer from '../static/Footer';
 
 const Profile = () => (
   <div>
@@ -21,6 +22,8 @@ const Profile = () => (
         </Col>
       </Row>
     </Container>
+    <div className="footer-space" />
+    <Footer />
   </div>
 );
 export default Profile;

@@ -1,7 +1,9 @@
 import { EDITPROFILE, GETPROFILE } from '../constants/action-types';
 
 const initialState = {
-  user_data: {},
+  user_data: {
+    profile: {},
+  },
 };
 
 function userReducer(state = initialState, action) {
@@ -11,7 +13,7 @@ function userReducer(state = initialState, action) {
   if (action.type === EDITPROFILE) {
     return {
       ...state,
-      user_data: action.payload
+      user_data: action.payload,
     };
   }
   if (action.type === GETPROFILE) {

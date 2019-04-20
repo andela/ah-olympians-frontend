@@ -40,7 +40,8 @@ export const registerUser = userdata => async (dispatch) => {
         return dispatch({ type: actionTypes.REGISTER_ERROR, payload: retData });
       }
 
-      dispatch(submitStatus(true));
-      return alert('Server Error'); // eslint-disable-line no-alert
+      alert('Server Error'); // eslint-disable-line no-alert
+
+      return dispatch(submitStatus(true));
     });
 };

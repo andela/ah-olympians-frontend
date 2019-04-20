@@ -22,12 +22,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
 #idea
 .idea/
-package-lock.json
-__snapshots__/
 .css
-
-
-*.css
 yarn.lock
+package-lock.json

@@ -7,7 +7,10 @@ import Register from '../components/signup/register';
 import Profile from '../components/profile/Profile';
 import RequestResetForm from '../components/ResetPassword/requestReset';
 import ResetPassword from '../components/ResetPassword/resetPassword';
-import store from '../store/index';
+import store from '../store/store';
+import ViewProfiles from '../components/Following/viewprofiles';
+import Followers from '../components/Following/followers';
+import Following from '../components/Following/following';
 
 const Approuter = () => (
   <Provider store={store}>
@@ -20,6 +23,10 @@ const Approuter = () => (
           <Route path="/profile" component={Profile} />
           <Route path="/resetpassword" component={RequestResetForm} />
           <Route path="/resetform/:token" component={ResetPassword} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/followers" component={Followers} />
+          <Route path="/following" component={Following} />
+          <Route path="/profiles" component={ViewProfiles} />
         </Switch>
       </div>
     </BrowserRouter>

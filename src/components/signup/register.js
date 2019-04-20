@@ -139,12 +139,8 @@ class Signup extends Component {
           <h2 className="text-center page-header">User Registration</h2>
           <Row>
             <Col sm={3} md={4} />
-            <Col sm={4} className="center-col">
-              <Form
-                id="register_form"
-                validated={validated}
-                onSubmit={this.handleSubmit}
-              >
+            <Col sm={6} md={4} className="center-col border-round">
+              <Form id="register_form" validated={validated} onSubmit={this.handleSubmit}>
                 <Form.Group as={Row} controlId="username">
                   <Form.Label column sm={12}>
                     Username:

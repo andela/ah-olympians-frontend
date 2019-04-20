@@ -1,8 +1,12 @@
-import React from 'react';
-
 import store from '../store';
 
-const initialState = { user: { user_data: {} }, article: { article: [] } };
+const initialUser = {
+  user_data: {
+    profile: {},
+  },
+};
+
+const initialState = { user: initialUser, article: { article: [] } };
 
 describe('user store', () => {
   it('Should have store intitialized', () => {

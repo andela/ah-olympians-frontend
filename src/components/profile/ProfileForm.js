@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loader from './Loading';
 
-
 import { editProfile, getProfile } from '../../actions/index';
-
 
 class ProfileForm extends Component {
   constructor(props) {
@@ -45,15 +43,8 @@ class ProfileForm extends Component {
     }
   }
 
-
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-  }
-
-  addFile(event) {
-    this.setState({
-      picture: event.target.files[0].name,
-    });
   }
 
   onSubmit(event) {
@@ -77,9 +68,19 @@ class ProfileForm extends Component {
     });
   }
 
+  addFile(event) {
+    this.setState({
+      picture: event.target.files[0].name,
+    });
+  }
+
   render() {
-    this.renderProfile = <Loader/>;
-    if (this.profile && this.state.edit === 'off' && this.state.message !== 'successfully updated') {
+    this.renderProfile = <Loader />;
+    if (
+      this.profile
+      && this.state.edit === 'off'
+      && this.state.message !== 'successfully updated'
+    ) {
       this.renderProfile = (
         <div className="profile-edit">
           <div id="message" className="alert-success">
@@ -92,7 +93,9 @@ class ProfileForm extends Component {
           />
           <br />
           <button type="button" className="EdgeButton EdgeButton--tertiary">
-            <span className="button-text" onClick={this.onCLick}>Edit profile</span>
+            <span className="button-text" onClick={this.onCLick}>
+              Edit profile
+            </span>
           </button>
           <b>User Name:</b>
           <br />
@@ -126,7 +129,6 @@ class ProfileForm extends Component {
             alt={this.profile.username}
           />
           <Form>
-
             <div className="input-group">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="inputGroupFileAddon01">
@@ -149,8 +151,12 @@ class ProfileForm extends Component {
             </div>
             <Form.Group controlId="password">
               <Form.Label>Username</Form.Label>
-              <Form.Control onChange={this.onChange} name="username" type="text" placeholder="username"
-                            defaultValue={this.profile.username}
+              <Form.Control
+                onChange={this.onChange}
+                name="username"
+                type="text"
+                placeholder="username"
+                defaultValue={this.profile.username}
               />
             </Form.Group>
 
@@ -192,7 +198,7 @@ class ProfileForm extends Component {
               />
             </Form.Group>
 
-            <Form.Group controlId="quotes">»
+            <Form.Group controlId="quotes">
               <Form.Label>Favourite Quotes</Form.Label>
               <Form.Control
                 as="textarea"
@@ -206,15 +212,22 @@ class ProfileForm extends Component {
               />
             </Form.Group>
 
-
-            <Button variant="primary" type="submit" className="button-submit" onClick={this.onSubmit}>
+            <Button
+              variant="primary"
+              type="submit"
+              className="button-submit"
+              onClick={this.onSubmit}
+            >
               Change
             </Button>
           </Form>
         </div>
       );
     }
-    if (this.state.edit === 'off' && this.state.message === 'successfully updated') {
+    if (
+      this.state.edit === 'off'
+      && this.state.message === 'successfully updated'
+    ) {
       this.renderProfile = (
         <div className="profile-edit">
           <img
@@ -224,7 +237,9 @@ class ProfileForm extends Component {
           />
           <br />
           <button type="button" className="EdgeButton EdgeButton--tertiary">
-            <span className="button-text" onClick={this.onCLick}>Edit profile</span>
+            <span className="button-text" onClick={this.onCLick}>
+              Edit profile
+            </span>
           </button>
           <b>User Name:</b>
           <br />
@@ -249,18 +264,13 @@ class ProfileForm extends Component {
         </div>
       );
     }
-    return (
-      <div>
-        {this.renderProfile}
-      </div>
-    );
+    return <div>{this.renderProfile}</div>;
   }
 }
 
 editProfile.propTypes = {
   editProfile: PropTypes.func,
   onGetProfile: PropTypes.func,
-
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -275,5 +285,7 @@ const mapStateToProp = state => ({
   user: state.user.user_data,
 });
 
-
-export default connect(mapStateToProp, mapDispatchToProps)(ProfileForm);
+export default connect(
+  mapStateToProp,
+  mapDispatchToProps,
+)(ProfileForm);

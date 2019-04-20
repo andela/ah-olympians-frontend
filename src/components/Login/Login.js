@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import loginAction from '../../actions/index';
+import Footer from '../static/Footer';
 import './Login.scss';
 import SocialAuth from '../social/index';
 
@@ -146,6 +147,7 @@ export class Login extends Component {
             </form>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
