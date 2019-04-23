@@ -1,6 +1,16 @@
 ## Description ##
 This pull request adds a pull request template so that all contributors can have a uniform and standard format on there pull requests.
 
+## How can This be tested ##
+Clone the repo then:
+- checkout to this branch
+- do `npm install`
+- do `npm install -g npm-install-peers`
+- do `npm run coverage`
+- do `npm start`
+-
+-
+
 ## Type of change ##
 Please select the relevant option
 - [ ] Bug fix(a non-breaking change which fixes an issue)
@@ -23,7 +33,7 @@ Please describe the tests that you ran to verify your changes
 - [ ] New and existing tests pass locally with my changes
 
 ## Related Pivotal Tracker stories ##
-[165079446](https://www.pivotaltracker.com/story/show/165079446)
+[#165079446](https://www.pivotaltracker.com/story/show/165079446)
 
 ## Reviewers ##
 - @andela/olympian-devs
