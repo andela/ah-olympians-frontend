@@ -3,6 +3,7 @@
  */
 import loginAction from './login.actions';
 
+export * from './notifications.actions';
 export default loginAction;
 export * from './register';
 export * from './profile';

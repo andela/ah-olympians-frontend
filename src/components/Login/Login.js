@@ -70,14 +70,11 @@ export class Login extends Component {
     e.preventDefault();
     const { name, value } = e.target;
     const { formErrors } = this.state;
-    switch (name) {
-      case 'email':
-        formErrors.email = emailRegex.test(value)
-          ? ''
-          : 'invalid email address';
-        break;
-      default:
-        break;
+    if (name === 'email') {
+      formErrors.email = emailRegex.test(value)
+        ? ''
+        : 'invalid email address';
+    } else {
     }
 
     this.setState({ formErrors, [name]: value });

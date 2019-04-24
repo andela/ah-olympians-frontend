@@ -4,3 +4,7 @@ export const loginConstants = {
 
   LOGOUT: 'USERS_LOGOUT',
 };
+
+export const notificationConstants = {
+  NOTIFY_SUCCESS: 'NOTIFICATION_SUCCESS',
+};

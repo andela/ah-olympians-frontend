@@ -1,0 +1,82 @@
+$theme: 063642;
+$blue: #0088cc;
+$bckgrnd: #f0f5f5;
+$border: #efefef;
+$grey: #grey;
+$orangered: orangered;
+$shadow: #555;
+$white: #white;
+
+* .icon-blue {
+  color: $blue;
+}
+*.icon-grey {
+  color: grey;
+}
+
+i {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.fa {
+  position: relative;
+}
+
+.badge-1 {
+  background: $orangered;
+  border-radius: 50%;
+  color: $white;
+  display: block;
+  font-size: 0.35em;
+  height: 2em;
+  line-height: 2em;
+  position: absolute;
+  right: -0.75em;
+  text-align: center;
+  top: -0.75em;
+  width: 2em;
+}
+
+.popover {
+  background: $bckgrnd;
+  border: 1px solid $border;
+  box-shadow: 0 10px 50px $shadow;
+  max-height: 400px !important;
+  min-width: 450px;
+  overflow: auto !important;
+  position: relative;
+}
+
+.content li {
+  color: black;
+  list-style: none;
+  padding: 2px;
+}
+
+.popover-header {
+  background: $theme !important;
+  color: $white;
+  position: sticky;
+  text-align: center;
+  top: 0;
+}
+
+.b {
+  //background: #063642;
+  color: $white;
+  width: 50%;
+}
+
+.close-notification {
+  background: $theme !important;
+  color: white;
+  margin: 5px;
+  width: 100%;
+}
+
+.popover-footer {
+  bottom: 0;
+  //margin: 5px;
+  position: sticky;
+}

@@ -1,8 +1,4 @@
 import { loginConstants } from '../constants';
-import {
-  SOCIAL_LOGIN_ERROR,
-  SOCIAL_LOGIN_SUCCESS,
-} from '../actions/action_types';
 
 const initialState = {
   loggedIn: false,
@@ -24,15 +20,6 @@ function loginReducer(state = initialState, action) {
         errors: action.error,
         user: {},
       };
-    case SOCIAL_LOGIN_SUCCESS:
-      return {
-        ...state,
-        loggedIn: true,
-        user: action.payload,
-        errors: '',
-      };
-    case SOCIAL_LOGIN_ERROR:
-      return { loggedIn: false, errors: action.payload, user: {} };
     default:
       return state;
   }

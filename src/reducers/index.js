@@ -7,7 +7,7 @@ import { requestPassword } from './requestPasswordReset';
 import { resetPassword } from './resetPassword';
 import followingReduce from './following';
 import { sendLike } from './like.article.reducer';
-
+import notificationReducer from './notifications.reducer';
 
 const rootReducer = combineReducers({
   registerUser: registerReducer,
@@ -15,6 +15,7 @@ const rootReducer = combineReducers({
   articles: articlesReducer,
   login: loginReducer,
   following: followingReduce,
+  notifications: notificationReducer,
   requestPassword,
   resetPassword,
   sendLike,
