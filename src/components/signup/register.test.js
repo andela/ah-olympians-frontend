@@ -1,10 +1,13 @@
 import React from 'react';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
 import ReactDOM from 'react-dom';
+import moxios from 'moxios';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import thunk from 'redux-thunk';
+import axios from 'axios';
 import registerReducer from '../../reducers/register';
 import * as actions from '../../actions/index';
 import Register from './register';
@@ -116,12 +119,6 @@ describe('actions', () => {
   });
 });
 
-describe('store', () => {
-  it('Should have store intitialized', () => {
-    expect(store.getState().registerUser).toEqual(initialState);
-  });
-});
-
 describe('Reducers', () => {
   it('Should return initial state', () => {
     expect(registerReducer(initialState)).toEqual(initialState);
@@ -194,9 +191,18 @@ describe('Register states', () => {
     const userInput = registerPage.find('#username');
     const emailInput = registerPage.find('#email');
     const passwordInput = registerPage.find('#password');
-    userInput.simulate('change');
-    emailInput.simulate('change');
-    passwordInput.simulate('change');
+    userInput.simulate('focus');
+    userInput.simulate('change', {
+      target: { value: 'Hello', name: 'username' },
+    });
+    emailInput.simulate('focus');
+    emailInput.simulate('change', {
+      target: { value: 'Hello', name: 'email' },
+    });
+    passwordInput.simulate('focus');
+    passwordInput.simulate('change', {
+      target: { value: 'Hello', name: 'password' },
+    });
     setTimeout(() => {
       expect(registerPage.state().store.getState().registerUser.errors).toEqual(
         expectedErrors,

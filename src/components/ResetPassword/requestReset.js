@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import requestPassword from '../../actions/requestPasswordReset';
-import 'bootstrap/dist/css/bootstrap.css';
 import '../Login/Login.scss';
 
 export class RequestResetForm extends Component {

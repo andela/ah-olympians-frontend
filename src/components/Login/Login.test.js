@@ -30,7 +30,6 @@ describe('component', () => {
   const loginComponent = shallow(<Login {...props} />);
 
   const emailInput = wrapper.find('#email');
-  const passwordInput = wrapper.find('#password');
 
   it('one button present initially', () => {
     expect(wrapper.find('button').length).toEqual(0);

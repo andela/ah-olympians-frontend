@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { resetPassword } from '../../actions/resetPassword';
-import 'bootstrap/dist/css/bootstrap.css';
 import '../Login/Login.scss';
 
 
