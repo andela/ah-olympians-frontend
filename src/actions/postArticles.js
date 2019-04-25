@@ -25,9 +25,10 @@ export const fetchArticle = slug => async (dispatch) => {
       dispatch({ type: FETCH_ARTICLE, payload: result.data });
     })
     .catch((error) => {
+      console.log(error.response);
       dispatch({
         type: ACTION_FAILED,
-        payload: error,
+        payload: error.response.data.message,
       });
     });
 };
