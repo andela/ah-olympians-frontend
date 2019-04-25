@@ -3,5 +3,11 @@ export const FAIL_SEND = 'FAIL_SEND';
 export const RESET_REQUEST = 'RESET_REQUEST';
 export const RESET_SUCCESSFUL = 'RESET_SUCCESSFUL';
 export const RESET_FAILURE = 'RESET_FAILURE';
-
 export const BASE_URL = 'https://aholympian.herokuapp.com/api/';
+export const FETCH_ARTICLES = 'FETCH_ARTICLES';
+export const FETCH_ARTICLES_SUCCESS = 'FETCH_ARTICLES_SUCCESS';
+export const FETCH_ARTICLE = 'FETCH_ARTICLE';
+export const NEW_ARTICLE = 'NEW_ARTICLE';
+export const UPDATE_ARTICLE = 'UPDATE_ARTICLE';
+export const AUTHENTICATION_FAILED = 'AUTHENTICATION_FAILED';
+export const ACTION_FAILED = 'ACTION_FAILED';

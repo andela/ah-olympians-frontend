@@ -89,7 +89,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 const mapStateToProp = state => ({
-  article: state.article.article,
+  article: state.articles.article,
 });
 
 
