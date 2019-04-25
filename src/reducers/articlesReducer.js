@@ -1,5 +1,6 @@
 import {
-  FETCH_ARTICLES, FETCH_ARTICLE, NEW_ARTICLE, UPDATE_ARTICLE, AUTHENTICATION_FAILED, ACTION_FAILED,
+  FETCH_ARTICLES, FETCH_ARTICLE, NEW_ARTICLE, UPDATE_ARTICLE, AUTHENTICATION_FAILED,
+  ACTION_FAILED, REPORT_ARTICLE,
 } from '../actions/types';
 
 const initialState = {
@@ -7,6 +8,9 @@ const initialState = {
   item: { article: {} },
   update_item: {},
   errors: [],
+  errorsFound: false,
+  successMessage: {},
+  wasSuccessful: false,
 };
 
 export default function (state = initialState, action) {
@@ -41,7 +45,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         errors: action.payload,
+        errorsFound: true,
       };
+    case REPORT_ARTICLE:
+      return {
+        ...state,
+        successMessage: action.payload,
+        wasSuccessful: true,
+        errorsFound: false,
+      }
     default:
       return state;
   }

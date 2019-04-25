@@ -10,6 +10,7 @@ function setup() {
   const props = {
     fetchArticle: jest.fn(),
     anArticle: {},
+    errors: [],
     match: {
       params: {
         slug: 'new',
@@ -33,6 +34,9 @@ describe('components', () => {
       enzymeWrapper.setProps(
         {
           fetchArticle: jest.fn(),
+          history: {
+            push: jest.fn(),
+          },
           anArticle: {
             article: {
               slug: 'new',
@@ -43,7 +47,11 @@ describe('components', () => {
               created_at: '2019-04-10T13:30:20.231197Z',
             },
           },
-          errors: [],
+          currentUser: {
+            user: {
+              username: 'tester',
+            }
+          },
           match: {
             params: {
               slug: 'new',
@@ -53,6 +61,24 @@ describe('components', () => {
       );
 
       expect(enzymeWrapper).toMatchSnapshot();
+
+      const spy = jest.spyOn(enzymeWrapper.instance(), 'onChange');
+      const event = { target: { name: 'special', value: 'party' } };
+      enzymeWrapper.instance().onChange(event);
+      expect(spy).toBeCalledWith({ target: { name: 'special', value: 'party' } });
+
+      enzymeWrapper.instance().handleClose();
+      expect(enzymeWrapper.instance().state.modalShow).toBe(false);
+
+      enzymeWrapper.instance().handleShow();
+      expect(enzymeWrapper.instance().state.modalShow).toBe(true);
+
+
+      const event2 = {
+        preventDefault: jest.fn(),
+      };
+      enzymeWrapper.instance().onClick(event2);
+      expect(enzymeWrapper.instance().props.history.push).toHaveBeenCalled();
     });
     it('should render loading status before article loads', () => {
       const { enzymeWrapper } = setup();
@@ -63,57 +89,48 @@ describe('components', () => {
 
       expect(enzymeWrapper.containsMatchingElement(<h3>Loading...</h3>)).toBeTruthy();
     });
-    it('Should redirect to edit article when button is clicked', () => {
+    it('should render error message if submit is clicked without selecting an option', () => {
       const { enzymeWrapper } = setup();
 
-      enzymeWrapper.setProps(
-        {
-          fetchArticle: jest.fn(),
-          anArticle: {
-            article: {
-              slug: 'new',
-              body: 'Just a test article',
-              author: {
-                username: 'tester',
-              },
-              created_at: '2019-04-10T13:30:20.231197Z',
-            },
-          },
-          errors: [],
-          match: {
-            params: {
-              slug: 'new',
-            },
-          },
-          history: {
-            push: jest.fn(),
+      enzymeWrapper.setState({
+        anArticle: [],
+        reportMessage: undefined,
+      });
+
+      const event = {
+        preventDefault: jest.fn(),
+      };
+
+      expect(enzymeWrapper.instance().state.emptyForm).toBe(false);
+
+      enzymeWrapper.instance().onSubmit(event);
+      expect(enzymeWrapper.instance().state.emptyForm).toBe(true);
+    });
+    it('Should dispatch the reportArticle function when the form is submitted with correct input', () => {
+      const { enzymeWrapper } = setup();
+
+      enzymeWrapper.setProps({
+        reportArticle: jest.fn(),
+        history: {
+          push: jest.fn(),
+        },
+        match: {
+          path: '/articles/new',
+          params: {
+            slug: 'dummy',
           },
         },
-      );
+      });
 
       const event = {
         preventDefault: jest.fn(),
       };
       const state = {
-        anArticle: [{
-          title: 'new',
-          body: 'dummy',
-          author: {
-            username: 'user1',
-          },
-          created_at: '2019-04-25T11:05:47.274146Z',
-          tags: ['tag1', 'tag2']
-        }],
-        currentUser: {
-          user:{
-            username: 'user1',
-          },
-        },
-        errors: ''
+        reportMessage: 'test message',
       };
       enzymeWrapper.setState(state);
-      enzymeWrapper.instance().onClick(event);
-      expect(enzymeWrapper.instance().props.history.push).toHaveBeenCalled();
+      enzymeWrapper.instance().onSubmit(event);
+      expect(enzymeWrapper.instance().props.reportArticle).toHaveBeenCalled();
     });
   });
 });

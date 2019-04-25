@@ -1,7 +1,7 @@
 import articlesReducer from '../articlesReducer';
 
 import {
-  NEW_ARTICLE, FETCH_ARTICLE, FETCH_ARTICLES, UPDATE_ARTICLE, AUTHENTICATION_FAILED,
+  NEW_ARTICLE, FETCH_ARTICLE, FETCH_ARTICLES, UPDATE_ARTICLE, AUTHENTICATION_FAILED, ACTION_FAILED,
 } from '../../actions/types';
 
 
@@ -12,6 +12,9 @@ describe('articles reducer', () => {
       items: [],
       update_item: {},
       errors: [],
+      "errorsFound": false,
+      "successMessage": {},
+      "wasSuccessful": false,
     });
   });
 
@@ -106,6 +109,18 @@ describe('articles reducer', () => {
       {
         errors: undefined,
         authenticated: false,
+      },
+    );
+  });
+  it('should handle ACTION_FAILED', () => {
+    expect(
+      articlesReducer({}, {
+        type: ACTION_FAILED,
+      }),
+    ).toEqual(
+      {
+        errors: undefined,
+        errorsFound: true,
       },
     );
   });
