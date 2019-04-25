@@ -30,9 +30,9 @@ const Approuter = () => (
           <Route path="/followers" component={Followers} exact />
           <Route path="/following" component={Following} exact />
           <Route path="/profiles" component={ViewProfiles} exact />
-          <Route path="/articles/new" component={PostArticlePage} exact />
-          <Route path="/article/:slug" component={GetArticlePage} exact />
-          <Route path="/article/:slug/edit" component={EditArticlePage} exact />
+          <Route path="/articles/new" component={PostArticle} />
+          <Route path="/article/:slug" component={GetArticle} exact />
+          <Route path="/article/:slug/edit" component={EditArticle} exact />
           <Route component={Page404} />
         </Switch>
       </div>
