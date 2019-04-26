@@ -1,15 +1,10 @@
-import axios from 'axios';
+let userToken = 'none';
 
-let user = JSON.parse(localStorage.getItem('user'));
-
-let userToken;
 try {
-  user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
   const { token } = user.user;
   userToken = token;
-} catch (err) {
-  const error = err.message;
-}
+} catch (err) {}
 
 
 const axiosHeader = {

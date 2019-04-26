@@ -17,6 +17,11 @@ body {
   position: relative;
 }
 
+.dark-label {
+  color: $black-color;
+  font-weight: bolder;
+}
+
 .footer-space {
   min-height: 130px;
 }

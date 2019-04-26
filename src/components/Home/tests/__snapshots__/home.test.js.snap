@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components HomePage should render self and subcomponents 1`] = `
+<div>
+  <header>
+    <ConnectFunction />
+  </header>
+  <div
+    className="App-header"
+  >
+    <div>
+      <Container
+        as="div"
+        fluid={false}
+      >
+        <Bootstrap(Row)
+          className=""
+        >
+          <Bootstrap(undefined)>
+            <CarouselItem>
+              <Bootstrap(Image)
+                alt="First slide"
+                className="d-block w-100 img-responsive"
+                src="coffee.jpg"
+                thumbnail={true}
+              />
+              <CarouselCaption>
+                <h3>
+                  First slide label
+                </h3>
+                <p>
+                  Nulla vitae elit libero, a pharetra augue mollis interdum.
+                </p>
+              </CarouselCaption>
+            </CarouselItem>
+            <CarouselItem>
+              <Bootstrap(Image)
+                alt="First slide"
+                className="d-block w-100"
+                src="create.jpg"
+                thumbnail={true}
+              />
+              <CarouselCaption>
+                <h3>
+                  First slide label
+                </h3>
+                <p>
+                  Nulla vitae elit libero, a pharetra augue mollis interdum.
+                </p>
+              </CarouselCaption>
+            </CarouselItem>
+            <CarouselItem>
+              <Bootstrap(Image)
+                alt="First slide"
+                className="d-block w-100"
+                src="notebook.jpg"
+                thumbnail={true}
+              />
+              <CarouselCaption>
+                <h3>
+                  First slide label
+                </h3>
+                <p>
+                  Nulla vitae elit libero, a pharetra augue mollis interdum.
+                </p>
+              </CarouselCaption>
+            </CarouselItem>
+          </Bootstrap(undefined)>
+        </Bootstrap(Row)>
+      </Container>
+      <br />
+      <Container
+        as="div"
+        fluid={false}
+      >
+        <CardColumns />
+      </Container>
+    </div>
+  </div>
+  <br />
+  <div
+    className="footer-space"
+  />
+  <Footer />
+</div>
+`;

@@ -1,12 +1,11 @@
 import axios from 'axios';
-import axiosHeader from '../axios_config';
 import { FETCH_ARTICLES, ACTION_FAILED } from './types';
 
 const apiURL = 'https://aholympian.herokuapp.com/api/';
 
-export const getArticles = () => async (dispatch) => {
+const getArticles = () => async (dispatch) => {
   await axios
-    .get(`${apiURL}articles`, axiosHeader)
+    .get(`${apiURL}articles`, { headers: { 'Content-Type': 'application/json' } })
     .then((result) => {
       dispatch({ type: FETCH_ARTICLES, payload: result.data });
     })
@@ -17,3 +16,5 @@ export const getArticles = () => async (dispatch) => {
       });
     });
 };
+
+export default getArticles;

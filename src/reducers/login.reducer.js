@@ -2,6 +2,7 @@ import { loginConstants } from '../constants';
 import {
   SOCIAL_LOGIN_ERROR,
   SOCIAL_LOGIN_SUCCESS,
+  LOCAL_STORAGE,
 } from '../actions/action_types';
 
 const initialState = {
@@ -10,6 +11,8 @@ const initialState = {
 };
 
 function loginReducer(state = initialState, action) {
+  let status = true;
+
   switch (action.type) {
     case loginConstants.LOGIN_SUCCESS:
       return {
@@ -23,6 +26,15 @@ function loginReducer(state = initialState, action) {
         loggedIn: false,
         errors: action.error,
         user: {},
+      };
+    case LOCAL_STORAGE:
+      if (!action.payload.username) {
+        status = false;
+      }
+      return {
+        ...state,
+        loggedIn: status,
+        user: action.payload,
       };
     case SOCIAL_LOGIN_SUCCESS:
       return {

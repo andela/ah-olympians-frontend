@@ -1,5 +1,4 @@
 import axios from 'axios';
-import axiosHeader from '../axios_config';
 import * as actionTypes from './action_types';
 
 export const submitStatus = submitState => dispatch => dispatch({
@@ -13,7 +12,7 @@ export const registerSuccess = () => dispatch => dispatch({
 export const registerUser = userdata => async (dispatch) => {
   const postData = JSON.stringify({ user: userdata });
   await axios
-    .post(`${process.env.REACT_APP_BASE_URL}/users/`, postData, axiosHeader)
+    .post(`${process.env.REACT_APP_BASE_URL}/users/`, postData, { headers: { 'Content-Type': 'application/json' } })
     .then((result) => {
       dispatch({ type: actionTypes.REGISTER_USER, payload: result.data.user });
       setTimeout(() => {

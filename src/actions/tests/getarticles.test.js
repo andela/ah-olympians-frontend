@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import moxios from 'moxios';
 
 import { FETCH_ARTICLES } from '../types';
-import { getArticles } from '../getArticles';
+import getArticles from '../getArticles';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

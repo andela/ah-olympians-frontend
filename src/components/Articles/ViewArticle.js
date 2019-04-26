@@ -6,6 +6,7 @@ import parse from 'html-react-parser';
 
 import { fetchArticle } from '../../actions/postArticles';
 import NavbarInstance from '../Navbar/Navbar';
+import Comments from '../comments/comments';
 import Footer from '../static/Footer';
 import '../../App.scss';
 import './Articles.scss';
@@ -60,12 +61,12 @@ export class GetArticle extends Component {
     let articleDesc;
     let articleTags;
     let articleSlug;
-    let articleReadTime = {};
+    let articleReadTime = 0;
     const articleObject = this.state.anArticle;
     let articleDate;
     let tagItems = [];
 
-    if (articleObject != false) {
+    if (articleObject != false && articleObject[0].body) {
       articleBody = parse(articleObject[0].body);
       articleTitle = this.state.anArticle[0].title;
       articleSlug = this.state.anArticle[0].slug;
@@ -82,11 +83,11 @@ export class GetArticle extends Component {
 
     if (articleObject.length === 0) {
       return (
-        <div className="App-header">
-          <header>
-            <NavbarInstance />
-          </header>
-          <h3>Loading...</h3>
+        <div>
+          <NavbarInstance />
+          <div className="App-header">
+            <h3>Loading...</h3>
+          </div>
         </div>
       );
     }
@@ -99,84 +100,82 @@ export class GetArticle extends Component {
       ));
     } catch (e) {}
     return (
-      <div className="App-header">
-        <header>
-          <NavbarInstance />
-        </header>
-        <div className="article-container">
-          <Container>
-            <Row className="justify-content-md-center draw-line-horizontal">
-              <h1>
-                <strong>{articleTitle}</strong>
-              </h1>
-            </Row>
-          </Container>
-          <Container>
-            <Row className="justify-content-md-center">
-              <Col className="draw-line-vertical" sm={2}>
-                <div className="sidebar">
-                  <i className="fas fa-user" />
-                  <strong> By </strong>
-                  {articleAuthor}
-                </div>
-                <br />
-                <div className="sidebar">
-                  <i className="fas fa-list" />
-                  <strong> Description: </strong>
-                  {articleDesc}
-                </div>
-                <br />
-                <div className="sidebar">
-                  <i className="far fa-calendar-alt" />
-                  <strong> Published: </strong>
-                  {articleDate}
-                </div>
-                <br />
-                <div className="sidebar">
-                  <i className="fas fa-eye" />
-                  <span>{articleReadTime}</span>
+      <div>
+        <NavbarInstance />
+        <div className="App-header">
+          <div className="article-container">
+            <Container>
+              <Row className="justify-content-md-center draw-line-horizontal">
+                <h1>
+                  <strong>{articleTitle}</strong>
+                </h1>
+              </Row>
+            </Container>
+            <Container>
+              <Row className="justify-content-md-center">
+                <Col className="draw-line-vertical" sm={2}>
+                  <div className="sidebar">
+                    <i className="fas fa-user" />
+                    <strong> By </strong>
+                    {articleAuthor}
+                  </div>
                   <br />
+                  <div className="sidebar">
+                    <i className="fas fa-list" />
+                    <strong> Description: </strong>
+                    {articleDesc}
+                  </div>
                   <br />
-                  <SocialShare title={articleTitle} slug={articleSlug} />
-                </div>
-                <br />
-                <div className="sidebar">
-                  <h5>Tags</h5>
-                  {tagItems}
-                </div>
-                <br />
-
-                <br />
-                <div>
-                  {loggedIn ? (
-                    <div>
-                      {currentUser.user.username === articleAuthor ? (
-                        <button
-                          type="button"
-                          className="btn btn-primary btn-sm"
-                          onClick={this.onClick}
-                        >
-                          Edit Article
-                        </button>
-                      ) : (
-                        ''
-                      )}
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                </div>
-              </Col>
-              <Col sm={10} className="view-font">
-                <div className="image-wrapper">{articleThisOne}</div>
+                  <div className="sidebar">
+                    <i className="far fa-calendar-alt" />
+                    <strong> Published: </strong>
+                    {articleDate}
+                  </div>
+                  <br />
+                  <div className="sidebar">
+                    <i className="fas fa-eye" />
+                    <span>{articleReadTime}</span>
+                    <br />
+                    <br />
+                    <SocialShare title={articleTitle} slug={articleSlug} />
+                  </div>
+                  <br />
+                  <div className="sidebar">
+                    <h5>Tags</h5>
+                    {tagItems}
+                  </div>
+                  <br />
+                  <div>
+                    {loggedIn ? (
+                      <div>
+                        {currentUser.username === articleAuthor ? (
+                          <button
+                            type="button"
+                            className="btn btn-primary btn-sm"
+                            onClick={this.onClick}
+                          >
+                            Edit Article
+                          </button>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                </Col>
+                <Col sm={10} className="view-font">
+                  <div className="image-wrapper">{articleThisOne}</div>
+                </Col>
                 <div className="liking">
                   <ArticleLiking slug={this.props.match.params.slug} />
                 </div>
-                <div className="image-wrapper">{articleThisOne}</div>
-              </Col>
-            </Row>
-          </Container>
+              </Row>
+            </Container>
+          </div>
         </div>
+        <Comments article={this.props.match.params.slug} />
         <br />
         <div className="footer-space" />
         <Footer />
@@ -187,12 +186,12 @@ export class GetArticle extends Component {
 
 GetArticle.defaultProps = {
   currentUser: {},
-  loggedIn: false,
 };
 
 GetArticle.propTypes = {
   fetchArticle: PropTypes.func.isRequired,
-  currentUser: PropTypes.object,
+  currentUser: PropTypes.shape({}),
+  loggedIn: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({

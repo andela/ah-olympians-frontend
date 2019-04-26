@@ -52,7 +52,6 @@ describe('components', () => {
         },
       );
 
-      expect(enzymeWrapper.find('header').hasClass('')).toBe(true);
       expect(enzymeWrapper).toMatchSnapshot();
     });
     it('should render loading status before article loads', () => {
@@ -61,7 +60,7 @@ describe('components', () => {
       enzymeWrapper.setState({
         anArticle: [],
       });
-      expect(enzymeWrapper.find('header').hasClass('')).toBe(true);
+
       expect(enzymeWrapper.containsMatchingElement(<h3>Loading...</h3>)).toBeTruthy();
     });
     it('Should redirect to edit article when button is clicked', () => {

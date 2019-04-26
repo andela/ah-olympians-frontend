@@ -41,9 +41,15 @@ export class Login extends Component {
     this.onAlertClose = this.onAlertClose.bind(this);
   }
 
+  componentDidMount() {
+    localStorage.setItem('user', '');
+  }
+
   componentWillReceiveProps(newProps) {
     if (!newProps.user.errors) {
-      newProps.history.push('/');
+      setTimeout(() => {
+        newProps.history.push('/');
+      }, 50);
     }
     const { errors } = newProps.user;
     this.setState({

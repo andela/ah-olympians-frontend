@@ -8,7 +8,7 @@ import {
 describe('articles reducer', () => {
   it('should return initial state if no action', () => {
     expect(articlesReducer(undefined, {})).toEqual({
-      item: {},
+      item: { article: {} },
       items: [],
       update_item: {},
       errors: [],
