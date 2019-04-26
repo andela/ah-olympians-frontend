@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { loginConstants } from '../constants/index';
 
-
 function success(user) {
   return {
     type: loginConstants.LOGIN_SUCCESS,
@@ -25,8 +24,8 @@ const loginAction = (email, password) => async (dispatch) => {
     })
     .then(res => res.data)
     .then((user) => {
-      dispatch(success(user));
       localStorage.setItem('user', JSON.stringify(user));
+      dispatch(success(user));
 
       // return user;
     })

@@ -10,9 +10,9 @@ import Footer from '../static/Footer';
 import '../../App.scss';
 import './Articles.scss';
 import ArticleLiking from '../LikeDislikeArticle/like.dislike';
+import SocialShare from '../SocialShare/index';
 
 const readingTime = require('reading-time');
-
 
 export class GetArticle extends Component {
   constructor(props) {
@@ -31,9 +31,9 @@ export class GetArticle extends Component {
 
   componentWillReceiveProps(newProps) {
     const slug = newProps.match.params.slug;
-    if (newProps.errors.length>0) {
-      this.props.history.push(`/article/${slug}/404`)
-    } else{
+    if (newProps.errors.length > 0) {
+      this.props.history.push(`/article/${slug}/404`);
+    } else {
       const articles = [];
       const activeUser = [];
       articles.push(newProps.anArticle.article);
@@ -59,6 +59,7 @@ export class GetArticle extends Component {
     let articleAuthor;
     let articleDesc;
     let articleTags;
+    let articleSlug;
     let articleReadTime = {};
     const articleObject = this.state.anArticle;
     let articleDate;
@@ -67,11 +68,15 @@ export class GetArticle extends Component {
     if (articleObject != false) {
       articleBody = parse(articleObject[0].body);
       articleTitle = this.state.anArticle[0].title;
+      articleSlug = this.state.anArticle[0].slug;
       articleThisOne = parse(this.state.anArticle[0].body);
       articleAuthor = this.state.anArticle[0].author.username;
       articleDesc = this.state.anArticle[0].description;
       articleTags = this.state.anArticle[0].tag_list;
-      articleDate = this.state.anArticle[0].created_at.substr(0, this.state.anArticle[0].created_at.indexOf('T'));
+      articleDate = this.state.anArticle[0].created_at.substr(
+        0,
+        this.state.anArticle[0].created_at.indexOf('T'),
+      );
       articleReadTime = readingTime(this.state.anArticle[0].body).text;
     }
 
@@ -88,12 +93,11 @@ export class GetArticle extends Component {
     try {
       tagItems = articleTags.map(tagItem => (
         <div>
-          <i className="fas fa-tags"></i>
+          <i className="fas fa-tags" />
           <span>{tagItem}</span>
         </div>
       ));
-    } catch (e) {
-    }
+    } catch (e) {}
     return (
       <div className="App-header">
         <header>
@@ -103,9 +107,7 @@ export class GetArticle extends Component {
           <Container>
             <Row className="justify-content-md-center draw-line-horizontal">
               <h1>
-                <strong>
-                  { articleTitle }
-                </strong>
+                <strong>{articleTitle}</strong>
               </h1>
             </Row>
           </Container>
@@ -113,28 +115,29 @@ export class GetArticle extends Component {
             <Row className="justify-content-md-center">
               <Col className="draw-line-vertical" sm={2}>
                 <div className="sidebar">
-                  <i className="fas fa-user"></i>
+                  <i className="fas fa-user" />
                   <strong> By </strong>
                   {articleAuthor}
                 </div>
                 <br />
                 <div className="sidebar">
-                  <i className="fas fa-list"></i>
+                  <i className="fas fa-list" />
                   <strong> Description: </strong>
                   {articleDesc}
                 </div>
                 <br />
                 <div className="sidebar">
-                  <i className="far fa-calendar-alt"></i>
+                  <i className="far fa-calendar-alt" />
                   <strong> Published: </strong>
                   {articleDate}
                 </div>
                 <br />
                 <div className="sidebar">
-                  <i className="fas fa-eye"></i>
-                  <span>
-                    {articleReadTime}
-                  </span>
+                  <i className="fas fa-eye" />
+                  <span>{articleReadTime}</span>
+                  <br />
+                  <br />
+                  <SocialShare title={articleTitle} slug={articleSlug} />
                 </div>
                 <br />
                 <div className="sidebar">
@@ -142,31 +145,37 @@ export class GetArticle extends Component {
                   {tagItems}
                 </div>
                 <br />
+
+                <br />
                 <div>
-                  {loggedIn ?(
-                  <div>
-                    {currentUser.user.username===articleAuthor ?(
-                    <button type="button" class="btn btn-primary btn-sm" onClick={this.onClick}>Edit Article</button>
-                    ): (
+                  {loggedIn ? (
+                    <div>
+                      {currentUser.user.username === articleAuthor ? (
+                        <button
+                          type="button"
+                          className="btn btn-primary btn-sm"
+                          onClick={this.onClick}
+                        >
+                          Edit Article
+                        </button>
+                      ) : (
+                        ''
+                      )}
+                    </div>
+                  ) : (
                     ''
-                    )}
-                  </div>
-                   ): (
-                   ''
-                   )}
+                  )}
                 </div>
               </Col>
               <Col sm={10} className="view-font">
-                <div className="image-wrapper">
-                  { articleThisOne }
-                </div>
+                <div className="image-wrapper">{articleThisOne}</div>
                 <div className="liking">
                   <ArticleLiking slug={this.props.match.params.slug} />
                 </div>
+                <div className="image-wrapper">{articleThisOne}</div>
               </Col>
             </Row>
           </Container>
-         
         </div>
         <br />
         <div className="footer-space" />
@@ -193,5 +202,7 @@ const mapStateToProps = state => ({
   errors: state.articles.errors,
 });
 
-
-export default connect(mapStateToProps, { fetchArticle })(GetArticle);
+export default connect(
+  mapStateToProps,
+  { fetchArticle },
+)(GetArticle);
