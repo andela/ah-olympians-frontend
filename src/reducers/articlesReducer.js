@@ -1,5 +1,5 @@
 import {
-  FETCH_ARTICLES, FETCH_ARTICLE, NEW_ARTICLE, UPDATE_ARTICLE, AUTHENTICATION_FAILED,
+  FETCH_ARTICLES, FETCH_ARTICLE, NEW_ARTICLE, UPDATE_ARTICLE, AUTHENTICATION_FAILED, ACTION_FAILED,
 } from '../actions/types';
 
 const initialState = {
@@ -36,6 +36,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         update_item: action.payload,
+      };
+    case ACTION_FAILED:
+      return {
+        ...state,
+        errors: action.payload,
       };
     default:
       return state;

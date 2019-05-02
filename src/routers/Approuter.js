@@ -5,6 +5,7 @@ import Home from '../components/Home/Home';
 import PostArticle from '../components/Articles/PostArticle';
 import GetArticle from '../components/Articles/ViewArticle';
 import EditArticle from '../components/Articles/UpdateArticle';
+import Page404 from '../components/ErrorPages/Page404';
 import { Provider } from 'react-redux';
 import Register from '../components/signup/register';
 import Profile from '../components/profile/Profile';
@@ -21,17 +22,18 @@ const Approuter = () => (
       <div>
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/resetpassword" component={RequestResetForm} />
-          <Route path="/resetform/:token" component={ResetPassword} />
-          <Route path="/followers" component={Followers} />
-          <Route path="/following" component={Following} />
-          <Route path="/profiles" component={ViewProfiles} />
-          <Route path="/articles/new" component={PostArticle} />
+          <Route path="/register" component={Register} exact />
+          <Route path="/login" component={Login} exact />
+          <Route path="/profile" component={Profile} exact />
+          <Route path="/resetpassword" component={RequestResetForm} exact />
+          <Route path="/resetform/:token" component={ResetPassword} exact />
+          <Route path="/followers" component={Followers} exact />
+          <Route path="/following" component={Following} exact />
+          <Route path="/profiles" component={ViewProfiles} exact />
+          <Route path="/articles/new" component={PostArticle} exact/>
           <Route path="/article/:slug" component={GetArticle} exact />
-          <Route path="/article/:slug/edit" component={EditArticle} />
+          <Route path="/article/:slug/edit" component={EditArticle} exact />
+          <Route component={Page404} />
         </Switch>
       </div>
     </BrowserRouter>

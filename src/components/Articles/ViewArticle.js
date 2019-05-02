@@ -23,20 +23,25 @@ export class GetArticle extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const slug = this.props.match.params.slug;
     this.props.fetchArticle(slug);
   }
 
   componentWillReceiveProps(newProps) {
-    const articles = [];
-    const activeUser = [];
-    articles.push(newProps.anArticle.article);
-    activeUser.push(newProps.currentUser);
-    this.setState({
-      anArticle: articles,
-      currentUser: activeUser[0],
-    });
+    const slug = newProps.match.params.slug;
+    if (newProps.errors.length>0) {
+      this.props.history.push(`/article/${slug}/404`)
+    } else{
+      const articles = [];
+      const activeUser = [];
+      articles.push(newProps.anArticle.article);
+      activeUser.push(newProps.currentUser);
+      this.setState({
+        anArticle: articles,
+        currentUser: activeUser[0],
+      });
+    }
   }
 
   onClick(event) {
@@ -180,6 +185,7 @@ const mapStateToProps = state => ({
   anArticle: state.articles.item,
   currentUser: state.login.user,
   loggedIn: state.login.loggedIn,
+  errors: state.articles.errors,
 });
 
 
