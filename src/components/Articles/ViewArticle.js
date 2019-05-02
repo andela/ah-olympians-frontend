@@ -9,6 +9,7 @@ import NavbarInstance from '../Navbar/Navbar';
 import Footer from '../static/Footer';
 import '../../App.scss';
 import './Articles.scss';
+import ArticleLiking from '../LikeDislikeArticle/like.dislike';
 
 const readingTime = require('reading-time');
 
@@ -159,9 +160,13 @@ export class GetArticle extends Component {
                 <div className="image-wrapper">
                   { articleThisOne }
                 </div>
+                <div className="liking">
+                  <ArticleLiking slug={this.props.match.params.slug} />
+                </div>
               </Col>
             </Row>
           </Container>
+         
         </div>
         <br />
         <div className="footer-space" />

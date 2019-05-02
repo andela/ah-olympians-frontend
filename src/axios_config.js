@@ -8,8 +8,9 @@ try {
   const { token } = user.user;
   userToken = token;
 } catch (err) {
-	const error = err.message;
+  const error = err.message;
 }
+
 
 const axiosHeader = {
   headers: {

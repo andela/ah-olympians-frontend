@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  Button, Card, CardColumns, Carousel, Container, Image, Row,
+  Button,
+  Card,
+  CardColumns,
+  Carousel,
+  Container,
+  Image,
+  Row,
 } from 'react-bootstrap';
 import NavbarInstance from '../Navbar/Navbar';
 import Footer from '../static/Footer';
@@ -13,7 +19,6 @@ import { getArticles } from '../../actions/getArticles';
 import './Home.scss';
 import '../../App.scss';
 import '../../css/bootstrap.min.css';
-
 
 export class HomePage extends Component {
   constructor(props) {
@@ -44,21 +49,16 @@ export class HomePage extends Component {
       <Card key={article.slug}>
         <Card.Img variant="top" src={coffee} />
         <Card.Body>
-          <Card.Title>
-            {article.title}
-          </Card.Title>
-          <Card.Text>
-            Author -  
-            {article.author.username}
-          </Card.Text>
+          <Card.Title>{article.title}</Card.Title>
+          <Card.Text>Author -{article.author.username}</Card.Text>
           <Button
             variant="primary"
-            onClick={function (slug) {
+            onClick={function(slug) {
               this.props.history.push(`/article/${article.slug}`);
-            }.bind(this)
-          }>
-          Read More...
-           </Button>
+            }.bind(this)}
+          >
+            Read More...
+          </Button>
         </Card.Body>
       </Card>
     ));
@@ -80,7 +80,9 @@ export class HomePage extends Component {
                   />
                   <Carousel.Caption>
                     <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <p>
+                      Nulla vitae elit libero, a pharetra augue mollis interdum.
+                    </p>
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -92,7 +94,9 @@ export class HomePage extends Component {
                   />
                   <Carousel.Caption>
                     <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <p>
+                      Nulla vitae elit libero, a pharetra augue mollis interdum.
+                    </p>
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -104,7 +108,9 @@ export class HomePage extends Component {
                   />
                   <Carousel.Caption>
                     <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <p>
+                      Nulla vitae elit libero, a pharetra augue mollis interdum.
+                    </p>
                   </Carousel.Caption>
                 </Carousel.Item>
               </Carousel>
@@ -112,13 +118,11 @@ export class HomePage extends Component {
           </Container>
           <br />
           <Container>
-            <CardColumns>
-              { articleItem }
-            </CardColumns>
+            <CardColumns>{articleItem}</CardColumns>
           </Container>
         </div>
         <br />
-        <div className='footer-space' />
+        <div className="footer-space" />
         <Footer />
       </div>
     );
@@ -133,4 +137,7 @@ HomePage.propTypes = {
 const mapStateToProps = state => ({
   articles: state.articles.items,
 });
-export default connect(mapStateToProps, { getArticles })(HomePage);
+export default connect(
+  mapStateToProps,
+  { getArticles },
+)(HomePage);
