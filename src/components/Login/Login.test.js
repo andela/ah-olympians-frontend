@@ -1,38 +1,29 @@
 import React from 'react';
-import { combineReducers, applyMiddleware, createStore } from 'redux';
-import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+import moxios from 'moxios';
 import thunk from 'redux-thunk';
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import loginReducer from '../../reducers/index';
 import loginAction from '../../actions/index';
 import { Login } from './Login';
-import store from '../../store/store';
+import { loginConstants } from '../../constants';
+import loginReducer from '../../reducers/login.reducer';
 
 Enzyme.configure({ adapter: new Adapter() });
-
-const wrongEmail = 'test@email.com';
-const wrongPassword = 'passrd12';
 
 const email = 'user@email.com';
 const password = 'passw0rd';
 
-const allReducer = combineReducers({ login: loginReducer });
-const testStore = createStore(allReducer, applyMiddleware(thunk));
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 describe('component', () => {
-  const wrapper = shallow(
-    <Provider store={store}>
-      <Login />
-    </Provider>,
-  );
+  const wrapper = shallow(<Login />);
   const props = { user: { errors: {} }, loginAction: jest.fn() };
   const loginComponent = shallow(<Login {...props} />);
 
-  const emailInput = wrapper.find('#email');
-
   it('one button present initially', () => {
-    expect(wrapper.find('button').length).toEqual(0);
+    expect(wrapper.find('button').length).toEqual(1);
   });
 
   it('present', () => {
@@ -66,6 +57,38 @@ describe('component', () => {
       'invalid email address',
     );
   });
+
+  it('should redirect', () => {
+    wrapper.setState({
+      show: false,
+      close: true,
+      notifications: {},
+    });
+
+    const newProps = {
+      user: {
+        errors: '',
+      },
+      history: {
+        push: jest.fn(),
+      },
+      loginAction: jest.fn(),
+    };
+
+    const spy = jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+    wrapper.instance().componentWillReceiveProps(newProps);
+    expect(spy).toBeCalledWith(newProps);
+  });
+
+  it('should close alert', () => {
+    wrapper.setState({
+      show: true,
+    });
+
+    const spy = jest.spyOn(wrapper.instance(), 'onAlertClose');
+    wrapper.instance().onAlertClose();
+    expect(spy).toHaveBeenCalled();
+  });
 });
 
 describe('actions', () => {
@@ -73,21 +96,103 @@ describe('actions', () => {
     jest.setTimeout(10000);
   });
 
-  it('Should show Login errors', async () => {
-    const expectedErrors = 'Invalid email or password provided.';
-    const expectedAction = {
-      errors: expectedErrors,
+  it('creates NOTIFY_SUCCESS after successfully fetching notifications', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          user: {},
+        },
+      });
+    });
+
+    const expectedActions = [
+      {
+        type: loginConstants.LOGIN_SUCCESS,
+        payload: {},
+      },
+    ];
+
+    const store = mockStore({
+      payload: {},
+    });
+
+    return store.dispatch(loginAction()).then(() => {
+      // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('it dispatches login failure', async () => {
+    const errResp = {
+      status: 400,
+      response: { message: 'problem' },
+    };
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject(errResp);
+    });
+
+    const expectedActions = [
+      {
+        type: loginConstants.LOGIN_FAILURE,
+        payload: {},
+      },
+    ];
+
+    const store = mockStore({
+      payload: {},
+    });
+
+    return store.dispatch(loginAction()).catch(() => {
+      // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+});
+
+describe('Test reducer', () => {
+  const initialState = {
+    loggedIn: false,
+    user: {},
+  };
+
+  it('return initial state if no action', () => {
+    expect(loginReducer(initialState, {})).toEqual({
       loggedIn: false,
       user: {},
-    };
-    await testStore.dispatch(loginAction(wrongEmail, wrongPassword));
-    setTimeout(() => {
-      expect(testStore.getState().login.login).resolves.toEqual(expectedAction);
-    }, 3000);
+    });
   });
-  it('Should show logged in true', async () => {
-    const isLoggedIn = true;
-    await testStore.dispatch(loginAction(email, password));
-    expect(testStore.getState().login.login.loggedIn).toEqual(isLoggedIn);
+
+  it('return LOGIN_SUCCESS', () => {
+    expect(
+      loginReducer(initialState, {
+        type: loginConstants.LOGIN_SUCCESS,
+        payload: {
+          user: {},
+        },
+      }),
+    ).toEqual({
+      loggedIn: true,
+      user: {
+        user: {},
+      },
+      errors: '',
+    });
+  });
+
+  it('return LOGIN_FAILURE', () => {
+    const errors = 'Invalid email or password';
+    expect(
+      loginReducer(initialState, {
+        type: loginConstants.LOGIN_FAILURE,
+        error: errors,
+      }),
+    ).toEqual({
+      loggedIn: false,
+      user: {},
+      errors,
+    });
   });
 });
