@@ -5,7 +5,9 @@ import { NavDropdown } from 'react-bootstrap';
 let user = {};
 
 if (localStorage.getItem('user')) {
-  user = JSON.parse(localStorage.getItem('user'));
+  setTimeout(() => {
+    user = JSON.parse(localStorage.getItem('user'));
+  }, 3000);
 }
 const Dropdown = () => (
   <NavDropdown title={user.user.username} id="basic-nav-dropdown">
