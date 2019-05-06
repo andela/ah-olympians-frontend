@@ -8,3 +8,5 @@ export * from './register';
 export * from './profile';
 export * from './following';
 export * from './followUnfollow';
+export * from './comments';
+export * from './localStorage';

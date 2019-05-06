@@ -15,7 +15,7 @@ import Footer from '../static/Footer';
 import coffee from './img/coffee.jpg';
 import create from './img/create.jpg';
 import notebook from './img/notebook.jpg';
-import { getArticles } from '../../actions/getArticles';
+import getArticles from '../../actions/getArticles';
 import './Home.scss';
 import '../../App.scss';
 import '../../css/bootstrap.min.css';
@@ -55,71 +55,69 @@ export class HomePage extends Component {
             variant="primary"
             onClick={function(slug) {
               this.props.history.push(`/article/${article.slug}`);
-            }.bind(this)}
-          >
-            Read More...
+            }.bind(this)
+          }>
+          Read More...
           </Button>
         </Card.Body>
       </Card>
     ));
     return (
-      <div className="App-header">
+      <div>
         <header>
           <NavbarInstance />
         </header>
-        <div>
-          <Container>
-            <Row className="">
-              <Carousel>
-                <Carousel.Item>
-                  <Image
-                    className="d-block w-100 img-responsive"
-                    src={coffee}
-                    alt="First slide"
-                    thumbnail
-                  />
-                  <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>
-                      Nulla vitae elit libero, a pharetra augue mollis interdum.
-                    </p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                  <Image
-                    className="d-block w-100"
-                    src={create}
-                    alt="First slide"
-                    thumbnail
-                  />
-                  <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>
-                      Nulla vitae elit libero, a pharetra augue mollis interdum.
-                    </p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                  <Image
-                    className="d-block w-100"
-                    src={notebook}
-                    alt="First slide"
-                    thumbnail
-                  />
-                  <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>
-                      Nulla vitae elit libero, a pharetra augue mollis interdum.
-                    </p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              </Carousel>
-            </Row>
-          </Container>
-          <br />
-          <Container>
-            <CardColumns>{articleItem}</CardColumns>
-          </Container>
+        <div className="App-header">
+          <div>
+            <Container>
+              <Row className="">
+                <Carousel>
+                  <Carousel.Item>
+                    <Image
+                      className="d-block w-100 img-responsive"
+                      src={coffee}
+                      alt="First slide"
+                      thumbnail
+                    />
+                    <Carousel.Caption>
+                      <h3>First slide label</h3>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <Image
+                      className="d-block w-100"
+                      src={create}
+                      alt="First slide"
+                      thumbnail
+                    />
+                    <Carousel.Caption>
+                      <h3>First slide label</h3>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    <Image
+                      className="d-block w-100"
+                      src={notebook}
+                      alt="First slide"
+                      thumbnail
+                    />
+                    <Carousel.Caption>
+                      <h3>First slide label</h3>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                </Carousel>
+              </Row>
+            </Container>
+            <br />
+            <Container>
+              <CardColumns>
+                { articleItem }
+              </CardColumns>
+            </Container>
+          </div>
         </div>
         <br />
         <div className="footer-space" />

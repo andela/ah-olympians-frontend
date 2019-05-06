@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -12,92 +12,110 @@ import {
   Navbar,
   NavItem,
 } from 'react-bootstrap';
+import { fetchLocalStorage } from '../../actions/index';
 import AuthButtons from '../static/auth-buttons';
 import Dropdown from '../static/dropdown';
 import logo from '../../img/logo.png';
 import './navbar.scss';
 
-const NavbarObject = (props) => {
-  const { loggedIn } = props;
-  return (
-    <Navbar
-      bg="light"
-      expand="lg"
-      className="navbar navbar-expand-lg navbar-dark bg-dark"
-      fixed="top"
-    >
-      <Image src={logo} alt="logo" className="navbar-brand" responsive="true" />
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Container>
-          <div className="row">
-            <div className="col-sm-2 col-0" />
-            <div className="col-sm-7 col-12">
-              <Form inline>
-                <FormControl
-                  type="text"
-                  placeholder="Search"
-                  className="col-sm-8 col-md-9 col-12"
-                />
-                <Button
-                  className="btn col-sm-4 col-md-3 col-12"
-                  variant="outline-success"
-                >
-                  <i className="fa fa-search" />
-                  Search
-                </Button>
-              </Form>
+class NavbarObject extends Component {
+  componentWillMount() {
+    const { getLocal } = this.props;
+    getLocal();
+  }
+
+  render() {
+    const { loggedIn } = this.props;
+    return (
+      <Navbar
+        bg="light"
+        expand="lg"
+        className="navbar navbar-expand-lg navbar-dark bg-dark"
+        fixed="top"
+      >
+        <Image
+          src={logo}
+          alt="logo"
+          className="navbar-brand"
+          responsive="true"
+        />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Container>
+            <div className="row">
+              <div className="col-sm-2 col-0" />
+              <div className="col-sm-7 col-12">
+                <Form inline>
+                  <FormControl
+                    type="text"
+                    placeholder="Search"
+                    className="col-sm-8 col-md-9 col-12"
+                  />
+                  <Button
+                    className="btn col-sm-4 col-md-3 col-12"
+                    variant="outline-success"
+                  >
+                    <i className="fa fa-search" />
+                    Search
+                  </Button>
+                </Form>
+              </div>
+              <div className="col-sm-3 col-12 d-flex align-items-center justify-content-end">
+                {loggedIn ? <Dropdown /> : <AuthButtons />}
+              </div>
             </div>
-            <div className="col-sm-3 col-12 d-flex align-items-center justify-content-end">
-              {loggedIn ? <Dropdown /> : <AuthButtons />}
-            </div>
-          </div>
-          <br />
-          <div>
-            <Nav
-              fill
-              variant="pills"
-              className="justify-content-center mr-auto"
-            >
-              <NavItem>
-                <Link to="/" className="active nav-link">
-                  Home
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/" className="nav-link">
-                  Newest
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/" className="nav-link">
-                  Technology
-                </Link>
-              </NavItem>
-              <NavItem>
-                {loggedIn ? (
-                  <Link to="/profiles" className="nav-link">
-                    Profiles
+            <br />
+            <div>
+              <Nav
+                fill
+                variant="pills"
+                className="justify-content-center mr-auto"
+              >
+                <NavItem>
+                  <Link to="/" className="active nav-link">
+                    Home
                   </Link>
-                ) : (
-                  ''
-                )}
-              </NavItem>
-            </Nav>
-          </div>
-        </Container>
-      </Navbar.Collapse>
-    </Navbar>
-  );
-};
+                </NavItem>
+                <NavItem>
+                  <Link to="/" className="nav-link">
+                    Newest
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link to="/" className="nav-link">
+                    Technology
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  {loggedIn ? (
+                    <Link to="/profiles" className="nav-link">
+                      Profiles
+                    </Link>
+                  ) : (
+                    ''
+                  )}
+                </NavItem>
+              </Nav>
+            </div>
+          </Container>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+  }
+}
 
 NavbarObject.defaultProps = {
   loggedIn: false,
 };
 
 NavbarObject.propTypes = {
+  getLocal: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool,
 };
+
+const mapDispatchToProps = dispatch => ({
+  getLocal: () => dispatch(fetchLocalStorage()),
+});
 
 const mapStateToProps = (state) => {
   const { login } = state;
@@ -106,6 +124,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const NavbarInstance = connect(mapStateToProps)(NavbarObject);
+const NavbarInstance = connect(mapStateToProps, mapDispatchToProps)(NavbarObject);
 
 export default NavbarInstance;

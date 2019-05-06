@@ -1,17 +1,13 @@
 import React from 'react';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
-import configureMockStore from 'redux-mock-store';
 import ReactDOM from 'react-dom';
-import moxios from 'moxios';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import thunk from 'redux-thunk';
-import axios from 'axios';
 import registerReducer from '../../reducers/register';
 import * as actions from '../../actions/index';
 import Register from './register';
-import store from '../../store/store';
 import Approuter from '../../routers/Approuter';
 
 const initialState = {

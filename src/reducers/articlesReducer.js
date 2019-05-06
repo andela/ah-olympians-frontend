@@ -4,7 +4,7 @@ import {
 
 const initialState = {
   items: [],
-  item: {},
+  item: { article: {} },
   update_item: {},
   errors: [],
 };
