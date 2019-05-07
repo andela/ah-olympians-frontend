@@ -37,3 +37,16 @@
 
 .demo-editor {
   font-size: 16px !important; }
+
+.modal-content {
+  background-color: #f7f7f7 !important;
+  text-align: centered !important;
+}
+
+.modal-open {
+  color: black !important;
+  .custom-control-label {
+    color: black !important;
+    font-size: inherit;
+  }
+}

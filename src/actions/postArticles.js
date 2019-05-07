@@ -13,7 +13,7 @@ export const createArticle = postData => async (dispatch) => {
     .catch((error) => {
       dispatch({
         type: ACTION_FAILED,
-        payload: error,
+        payload: error.response.data,
       });
     });
 };
@@ -28,7 +28,7 @@ export const fetchArticle = slug => async (dispatch) => {
       console.log(error.response);
       dispatch({
         type: ACTION_FAILED,
-        payload: error.response.data.message,
+        payload: error.response.data,
       });
     });
 };
